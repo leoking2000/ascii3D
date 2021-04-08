@@ -16,7 +16,7 @@ void DrawLine(int x0, int y0, int x1, int x2, char x)
 
 void Display(Canvas *p_canvas)
 {
-    system("clear"); // NOTE: only for linux in win is system("clr");
+    system("cls"); // NOTE: for linux system("clear"); in win is system("cls");
 
     for(int y = 0; y < p_canvas->height; ++y)
     {
