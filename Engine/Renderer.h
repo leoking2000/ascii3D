@@ -1,31 +1,37 @@
 #pragma once
 #include "Canvas.h"
-#include <stdio.h>
+#include "Vec3.h"
 
 // define function to render into a canvas
 
-void FillCanvas(Canvas *p_canvas, char c)
+// 2D rendering
+void DrawLine2D(Canvas *canvas, Vec3 p0, Vec3 p1, char c)
 {
-    memset(p_canvas->_data, c,p_canvas->width * p_canvas->height * sizeof(char));
+    float dy = (p1.y - p0.y);
+	float dx = (p1.x - p0.x);
+	float steps = fmaxf(abs(dy), abs(dx));
+
+	float x_inclese = dx / steps;
+	float y_inclese = dy / steps;
+
+	float x = p0.x;
+	float y = p0.y;
+	for (int i = 0; i < steps; ++i)
+	{
+		x += x_inclese;
+		y += y_inclese;
+		if (x >= 0.0f && x < canvas->width && y >= 0.0f && y < canvas->height)
+		{
+			PutPixel(canvas, (int)x, (int)y, c);
+		}		
+	}
 }
 
-void DrawLine(int x0, int y0, int x1, int x2, char x)
+void DrawWireframeTriangle2D(Canvas *canvas, Vec3 p1, Vec3 p2, Vec3 p3, char c)
 {
-
+    DrawLine2D(canvas, p1, p2, c);
+    DrawLine2D(canvas, p2, p3, c);
+    DrawLine2D(canvas, p3, p1, c);
 }
 
-void Display(Canvas *p_canvas)
-{
-    system("cls"); // NOTE: for linux system("clear"); in win is system("cls");
-
-    for(int y = 0; y < p_canvas->height; ++y)
-    {
-        for(int x = 0; x < p_canvas->width; ++x)
-        {
-            char c = GetPixel(p_canvas, x, y);
-            printf("%c",c);
-        }
-        printf("\n");
-    }
-
-}
+// 3D rendering

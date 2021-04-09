@@ -1,5 +1,6 @@
 #pragma once
 #include "includes.h"
+#include <stdio.h>
 
 typedef struct
 {
@@ -26,6 +27,27 @@ char GetPixel(Canvas *p_canvas, int x, int y)
     assert(y < p_canvas->height);
 
     return p_canvas->_data[y * p_canvas->width + x];
+}
+
+void FillCanvas(Canvas *p_canvas, char c)
+{
+    memset(p_canvas->_data, c,p_canvas->width * p_canvas->height * sizeof(char));
+}
+
+void Display(Canvas *p_canvas)
+{
+    system("cls"); // NOTE: for linux system("clear"); in win is system("cls");
+
+    for(int y = 0; y < p_canvas->height; ++y)
+    {
+        for(int x = 0; x < p_canvas->width; ++x)
+        {
+            char c = GetPixel(p_canvas, x, y);
+            printf("%c",c);
+        }
+        printf("\n");
+    }
+
 }
 
 Canvas CreateCanvas(int width, int height, char fill)

@@ -2,24 +2,17 @@
 
 BOOL update(Canvas* canvas)
 {
-    static float x = 50;
-    static float y = 20;
+    Vec3 p1 = { 80.0f,  5.0f, 1.0f};
+    Vec3 p2 = { 40.0f, 30.0f, 1.0f};
+    Vec3 p3 = {120.0f, 30.0f, 1.0f};
 
-    PutPixel(canvas, (int)x    , (int)y    , '#');
-    PutPixel(canvas, (int)x    , (int)y + 1, '#');
-    PutPixel(canvas, (int)x + 1, (int)y    , '#');
-    PutPixel(canvas, (int)x + 1, (int)y + 1, '#');
-
-    x = x + 1.0f;
-    if((int)x >= canvas->width - 1) x = 0.0f;
-
+    DrawWireframeTriangle2D(canvas, p1, p2, p3, '*');
     return TRUE;
 }
 
 int main()
 {
     Canvas canvas = CreateCanvas(160, 40, ' ');
-
     StartEngine(&canvas, update);
 
     return 0;
