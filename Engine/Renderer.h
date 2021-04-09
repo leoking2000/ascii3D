@@ -4,9 +4,19 @@
 
 // define function to render into a canvas
 
+void WorldToScren(Canvas *canvas, Vec3* p)
+{
+	p->y = - p->y;
+	p->x = p->x + canvas->width / 2;
+	p->y = p->y + canvas->height / 2;
+}
+
 // 2D rendering
 void DrawLine2D(Canvas *canvas, Vec3 p0, Vec3 p1, char c)
 {
+	WorldToScren(canvas, &p0);
+	WorldToScren(canvas, &p1);
+
     float dy = (p1.y - p0.y);
 	float dx = (p1.x - p0.x);
 	float steps = fmaxf(abs(dy), abs(dx));
@@ -23,7 +33,7 @@ void DrawLine2D(Canvas *canvas, Vec3 p0, Vec3 p1, char c)
 		if (x >= 0.0f && x < canvas->width && y >= 0.0f && y < canvas->height)
 		{
 			PutPixel(canvas, (int)x, (int)y, c);
-		}		
+		}
 	}
 }
 

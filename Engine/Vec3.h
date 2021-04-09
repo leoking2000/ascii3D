@@ -13,5 +13,5 @@ void RotateZ(Vec3* vec, float radians)
 	float y = sinf(radians) * vec->x + cosf(radians) * vec->y;
 
     vec->x = x;
-    vec->y = -y;
+    vec->y = y;
 }
