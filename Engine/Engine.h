@@ -2,13 +2,13 @@
 #include "Renderer.h"
 
 
-void StartEngine(Canvas* canvas, BOOL (*mainloop)(Canvas* canvas))
+void StartEngine(Canvas* canvas, BOOL (*mainloop)(Canvas* canvas), char c)
 {
     BOOL run = TRUE;
 
     while(run)
     {
-        FillCanvas(canvas, ' ');
+        FillCanvas(canvas, c);
         run = mainloop(canvas);
         Display(canvas);
 

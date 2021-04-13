@@ -44,4 +44,9 @@ void DrawWireframeTriangle2D(Canvas *canvas, Vec3 p1, Vec3 p2, Vec3 p3, char c)
     DrawLine2D(canvas, p3, p1, c);
 }
 
+void DrawFilledTriangle2D(Canvas *canvas, Vec3 p1, Vec3 p2, Vec3 p3, char c)
+{
+
+}
+
 // 3D rendering
