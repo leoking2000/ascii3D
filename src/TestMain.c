@@ -8,8 +8,8 @@ BOOL update(Canvas* canvas)
     static Vec3 p3 = {  10.0f,-10.0f, 1.0f};
     static Vec3 p4 = { -10.0f,-10.0f, 1.0f};
 
-    DrawWireframeTriangle2D(canvas, p1, p2, p3, 254);
-    DrawWireframeTriangle2D(canvas, p2, p4, p3, 254);
+    DrawFilledTriangle2D(canvas, p1, p2, p3, 254);
+    DrawFilledTriangle2D(canvas, p2, p4, p3, 254);
 
     RotateZ(&p1, 0.1f);
     RotateZ(&p2, 0.1f);

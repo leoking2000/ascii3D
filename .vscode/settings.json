@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "canvas.h": "c"
+        "canvas.h": "c",
+        "math.h": "c"
     }
 }
