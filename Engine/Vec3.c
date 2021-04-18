@@ -1,5 +1,5 @@
+#include "includes.h"
 #include "Vec3.h"
-#include <math.h>
 
 void RotateZ(Vec3* vec, float radians)
 {

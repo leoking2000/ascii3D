@@ -27,7 +27,7 @@ void FillCanvas(Canvas *p_canvas, char c)
 
 void Display(Canvas *p_canvas)
 {
-    system("cls"); // NOTE: for linux system("clear"); in win is system("cls");
+    system("clear"); // NOTE: for linux system("clear"); in win is system("cls");
 
     for(int y = 0; y < p_canvas->height; ++y)
     {
