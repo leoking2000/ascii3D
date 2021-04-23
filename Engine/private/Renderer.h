@@ -1,6 +1,5 @@
 #pragma once
 #include "Canvas.h"
-#include "Vec3.h"
 
 // define function to render into a canvas
 

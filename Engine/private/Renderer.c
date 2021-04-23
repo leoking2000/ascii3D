@@ -6,6 +6,7 @@ void WorldToScren(Canvas *canvas, Vec3* p)
 	p->y = - p->y;
 	p->x = p->x + canvas->width / 2;
 	p->y = p->y + canvas->height / 2;
+
 }
 
 // 2D rendering
