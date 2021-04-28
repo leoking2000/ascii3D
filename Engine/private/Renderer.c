@@ -1,19 +1,21 @@
 #include "Renderer.h"
 // define function to render into a canvas
 
-void WorldToScren(Canvas *canvas, Vec3* p)
+void NDC_To_CancasSpace(Canvas *canvas, Vec3* p)
 {
-	p->y = - p->y;
-	p->x = p->x + canvas->width / 2;
-	p->y = p->y + canvas->height / 2;
 
+    float widthFactor = canvas->width / 2.0f;
+    float heightFactor = canvas->height / 2.0f;
+
+    p->x = p->x * widthFactor + widthFactor;
+    p->y = -p->y * heightFactor + heightFactor;
 }
 
 // 2D rendering
 void DrawLine2D(Canvas *canvas, Vec3 p0, Vec3 p1, char c)
 {
-	WorldToScren(canvas, &p0);
-	WorldToScren(canvas, &p1);
+	NDC_To_CancasSpace(canvas, &p0);
+	NDC_To_CancasSpace(canvas, &p1);
 
     float dy = (p1.y - p0.y);
 	float dx = (p1.x - p0.x);
@@ -90,9 +92,9 @@ void bottomFlatTri(Canvas *canvas, Vec3 p0, Vec3 p1, Vec3 p2, char c)
 
 void DrawFilledTriangle2D(Canvas *canvas, Vec3 p0, Vec3 p1, Vec3 p2, char c)
 {
-    WorldToScren(canvas, &p0);
-    WorldToScren(canvas, &p1);
-    WorldToScren(canvas, &p2);
+    NDC_To_CancasSpace(canvas, &p0);
+    NDC_To_CancasSpace(canvas, &p1);
+    NDC_To_CancasSpace(canvas, &p2);
 
     if (p1.y < p0.y) { swap(Vec3, p1, p0) }
     if (p2.y < p0.y) { swap(Vec3, p2, p0) }

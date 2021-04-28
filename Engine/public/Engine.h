@@ -5,9 +5,7 @@
 
 void InitializeEngine(int width, int height, char bg);
 
-void SetInitCallback(void(*init)());
-void SetUpdateCallback(void(*update)(float dt));
-void SetDrawCallback(void(*draw)());
+void SetUpdateCallback(void(*update)());
 
 void  SetUserData(void* data);
 void* GetUserData();

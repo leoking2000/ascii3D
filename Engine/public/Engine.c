@@ -6,9 +6,7 @@ typedef struct Engine
     Canvas canvas;
     char bg;
 
-    void(*Init)();
-    void(*Update)(float dt);
-    void(*Draw)();
+    void(*Update)();
 
     void* userData;
 
@@ -22,19 +20,9 @@ void InitializeEngine(int width, int height, char bg)
     engine.bg = bg;
 }
 
-void SetInitCallback(void(*init)())
-{
-    engine.Init = init;
-}
-
-void SetUpdateCallback(void(*update)(float dt))
+void SetUpdateCallback(void(*update)())
 {
     engine.Update = update;
-}
-
-void SetDrawCallback(void(*draw)())
-{
-    engine.Draw = draw;
 }
 
 void  SetUserData(void* data)
@@ -49,14 +37,12 @@ void* GetUserData()
 void StartEngine()
 {
     BOOL run = TRUE;
-    engine.Init();
 
     while(run)
     {
         FillCanvas(&engine.canvas, engine.bg);
 
-        engine.Update(0.1f);
-        engine.Draw();
+        engine.Update();
 
         Display(&engine.canvas);
 
@@ -79,7 +65,6 @@ void Render(const GameObject* obj)
     Vertex* proj_Vbuffer = (Vertex*)malloc(sizeof(Vertex) * obj->mesh.vcount);
 
     // Apply Tranformation of the obj
-    // translation and project.
     for(unsigned int i = 0; i < obj->mesh.vcount; i++ )
     {
         proj_Vbuffer[i] = obj->mesh.vertex_buffer[i];
@@ -97,28 +82,17 @@ void Render(const GameObject* obj)
         // translation
         proj_Vbuffer[i].pos = Add(proj_Vbuffer[i].pos, obj->transform.pos);
 
-        
-        proj_Vbuffer[i].pos.x *= 0.5f * engine.canvas.width;
-        proj_Vbuffer[i].pos.y *= 0.5f * engine.canvas.height;
-
         //proj_Vbuffer[i].pos = Mull(proj, proj_Vbuffer[i].pos);
 
     }
 
-    // draw triangles
-    for(unsigned int i = 0; i < obj->mesh.icount; i += 3)
+    // draw lines
+    for(unsigned int i = 0; i < obj->mesh.icount; i += 2)
     {
-        unsigned int v1 = obj->mesh.index_buffer[i];
-        unsigned int v2 = obj->mesh.index_buffer[i+1];
-        unsigned int v3 = obj->mesh.index_buffer[i+2];
+        unsigned int v0 = obj->mesh.index_buffer[i];
+        unsigned int v1 = obj->mesh.index_buffer[i+1];
 
-       //DrawFilledTriangle2D(&engine.canvas, proj_Vbuffer[v1].pos,
-       //                                         proj_Vbuffer[v2].pos,
-       //                                         proj_Vbuffer[v3].pos, 254);
-
-       DrawWireframeTriangle2D(&engine.canvas, proj_Vbuffer[v1].pos,
-                                               proj_Vbuffer[v2].pos,
-                                               proj_Vbuffer[v3].pos, '.');
+        DrawLine2D(&engine.canvas, proj_Vbuffer[v0].pos, proj_Vbuffer[v1].pos, '.');
     }
 
 

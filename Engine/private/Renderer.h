@@ -3,7 +3,7 @@
 
 // define function to render into a canvas
 
-void WorldToScren(Canvas *canvas, Vec3* p);
+void NDC_To_CancasSpace(Canvas *canvas, Vec3* p);
 
 // 2D rendering
 void DrawLine2D(Canvas *canvas, Vec3 p0, Vec3 p1, char c);
