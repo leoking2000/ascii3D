@@ -6,6 +6,7 @@ Vec3 Add(Vec3 a, Vec3 b)
     Vec3 r;
     r.x = a.x + b.x;
     r.y = a.y + b.y;
+    r.z = a.z + b.z;
 
     return r;
 }
@@ -15,6 +16,7 @@ Vec3 Sub(Vec3 a, Vec3 b)
     Vec3 r;
     r.x = a.x - b.x;
     r.y = a.y - b.y;
+    r.z = a.z - b.z;
 
     return r;
 }

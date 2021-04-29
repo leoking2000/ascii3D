@@ -3,12 +3,15 @@
 
 void NDC_To_CancasSpace(Canvas *canvas, Vec3* p)
 {
-
+    //printf("(%f, %f, %f) -> ", p->x, p->y, p->z);
     float widthFactor = canvas->width / 2.0f;
     float heightFactor = canvas->height / 2.0f;
+    float ZFactor = 1.0f / p->z;
 
-    p->x = p->x * widthFactor + widthFactor;
-    p->y = -p->y * heightFactor + heightFactor;
+    p->x = (p->x  * ZFactor + 1.0f) * widthFactor;
+    p->y = (-p->y * ZFactor + 1.0f) * heightFactor;
+
+    //printf("(%f, %f, %f)\n", p->x, p->y, p->z);
 }
 
 // 2D rendering
