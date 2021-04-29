@@ -87,12 +87,28 @@ void Render(const GameObject* obj)
     }
 
     // draw lines
-    for(unsigned int i = 0; i < obj->mesh.icount; i += 2)
+    for(unsigned int i = 0; i < obj->mesh.icount; i += 3)
     {
         unsigned int v0 = obj->mesh.index_buffer[i];
         unsigned int v1 = obj->mesh.index_buffer[i+1];
+        unsigned int v2 = obj->mesh.index_buffer[i+2];
 
-        DrawLine2D(&engine.canvas, proj_Vbuffer[v0].pos, proj_Vbuffer[v1].pos, '.');
+        Vec3 lineA = Add(proj_Vbuffer[v1].pos, proj_Vbuffer[v0].pos);
+		Vec3 lineB = Add(proj_Vbuffer[v2].pos, proj_Vbuffer[v0].pos);
+		Vec3 normal = Cross(lineA, lineB);
+        Normalize(&normal);
+
+		if (Dot(normal, proj_Vbuffer[v0].pos) > 0.0f) continue;
+
+        //DrawFilledTriangle2D(&engine.canvas, proj_Vbuffer[v0].pos,
+        //                                     proj_Vbuffer[v1].pos,
+        //                                     proj_Vbuffer[v2].pos, c);
+
+        DrawWireframeTriangle2D(&engine.canvas, proj_Vbuffer[v0].pos,
+                                                proj_Vbuffer[v1].pos,
+                                                proj_Vbuffer[v2].pos, '.');
+
+
     }
 
 

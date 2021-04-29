@@ -8,7 +8,7 @@ Mesh CreateMesh(const char* filename)
     Mesh a;
     return a;
 }
-/*
+
 Mesh CreateCube()
 {
     Mesh cube;
@@ -82,8 +82,8 @@ Mesh CreateCube()
 
     return cube;
 }
-*/
 
+/*
 Mesh CreateCube()
 {
     Mesh cube;
@@ -142,6 +142,7 @@ Mesh CreateCube()
 
     return cube;
 }
+*/
 
 void DestroyMesh(Mesh* mesh)
 {

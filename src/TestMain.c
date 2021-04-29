@@ -6,9 +6,10 @@ void update()
 
     GameObject* obj = (GameObject*)GetUserData();
     obj->transform.rot.z += z;
-    obj->transform.pos.z += z;
+    obj->transform.rot.x -= z;
+    //obj->transform.pos.z += z;
 
-    if(obj->transform.pos.z > 2.5f || obj->transform.pos.z <= 1.0f) z *= -1.0f;
+    //if(obj->transform.pos.z > 2.5f || obj->transform.pos.z <= 1.3f) z *= -1.0f;
 
     Render((GameObject*)GetUserData());
 }
@@ -19,7 +20,7 @@ int main()
     SetUpdateCallback(update);
 
     GameObject cube;
-    cube.transform.pos = (Vec3){0.0f, 0.0f, 1.5f};
+    cube.transform.pos = (Vec3){0.0f, 0.0f, 1.3f};
     cube.transform.rot = (Vec3){-1.0f, 1.0f, 0.0f};
     cube.transform.scale = (Vec3){1.0f, 1.0f, 1.0f};
     cube.mesh = CreateCube();
