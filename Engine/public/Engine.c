@@ -6,7 +6,7 @@ typedef struct Engine
     Canvas canvas;
     char bg;
 
-    void(*Update)();
+    void(*Update)(char in);
 
     void* userData;
 
@@ -20,7 +20,7 @@ void InitializeEngine(int width, int height, char bg)
     engine.bg = bg;
 }
 
-void SetUpdateCallback(void(*update)())
+void SetUpdateCallback(void(*update)(char in))
 {
     engine.Update = update;
 }
@@ -37,18 +37,20 @@ void* GetUserData()
 void StartEngine()
 {
     BOOL run = TRUE;
+    char input = 0;
 
     while(run)
     {
         FillCanvas(&engine.canvas, engine.bg);
 
-        engine.Update();
+        engine.Update(input);
 
         Display(&engine.canvas);
 
         printf("\nType the letter e to exit or ender to continie\n");
         printf(">>> ");
-        if(getchar() == 'e')
+        input = getchar();
+        if(input == 'e')
         {
             run = FALSE;
         }
