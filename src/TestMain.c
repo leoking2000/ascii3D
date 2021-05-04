@@ -1,15 +1,35 @@
 #include "../Engine/public/Engine.h"
 
-void update()
+void update(char in)
 {
-    static float z = 0.1f;
+    static float offset = 0.1f;
 
     GameObject* obj = (GameObject*)GetUserData();
-    obj->transform.rot.z += z;
-    obj->transform.rot.x -= z;
-    //obj->transform.pos.z += z;
 
-    //if(obj->transform.pos.z > 2.5f || obj->transform.pos.z <= 1.3f) z *= -1.0f;
+    switch (in)
+    {
+    case 'x':
+        obj->transform.rot.x += offset;
+        break;
+    case 'X':
+        obj->transform.rot.x -= offset;
+        break;
+    case 'y':
+        obj->transform.rot.y += offset;
+        break;
+    case 'Y':
+        obj->transform.rot.y -= offset;
+        break;
+    case 'z':
+        obj->transform.rot.z += offset;
+        break;
+    case 'Z':
+        obj->transform.rot.z -= offset;
+        break;
+    default:
+        break;
+    }
+
 
     Render((GameObject*)GetUserData());
 }
@@ -21,7 +41,7 @@ int main()
 
     GameObject cube;
     cube.transform.pos = (Vec3){0.0f, 0.0f, 1.3f};
-    cube.transform.rot = (Vec3){-1.0f, 1.0f, 0.0f};
+    cube.transform.rot = (Vec3){0.0f, 0.0f, 0.0f};
     cube.transform.scale = (Vec3){1.0f, 1.0f, 1.0f};
     cube.mesh = CreateCube();
 

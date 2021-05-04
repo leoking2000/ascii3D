@@ -5,7 +5,7 @@
 
 void InitializeEngine(int width, int height, char bg);
 
-void SetUpdateCallback(void(*update)());
+void SetUpdateCallback(void(*update)(char in));
 
 void  SetUserData(void* data);
 void* GetUserData();
