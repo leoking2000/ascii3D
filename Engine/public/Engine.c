@@ -88,12 +88,14 @@ void Render(const GameObject* obj)
 
     }
 
-    // draw lines
+    // draw Triangles
+    char a = 64; // a - 1
     for(unsigned int i = 0; i < obj->mesh.icount; i += 3)
     {
         unsigned int v0 = obj->mesh.index_buffer[i];
         unsigned int v1 = obj->mesh.index_buffer[i+1];
         unsigned int v2 = obj->mesh.index_buffer[i+2];
+        a++;
 
         Vec3 lineA = Add(proj_Vbuffer[v1].pos, proj_Vbuffer[v0].pos);
 		Vec3 lineB = Add(proj_Vbuffer[v2].pos, proj_Vbuffer[v0].pos);
@@ -104,11 +106,11 @@ void Render(const GameObject* obj)
 
         //DrawFilledTriangle2D(&engine.canvas, proj_Vbuffer[v0].pos,
         //                                     proj_Vbuffer[v1].pos,
-        //                                     proj_Vbuffer[v2].pos, c);
+        //                                    proj_Vbuffer[v2].pos, a);
 
         DrawWireframeTriangle2D(&engine.canvas, proj_Vbuffer[v0].pos,
                                                 proj_Vbuffer[v1].pos,
-                                                proj_Vbuffer[v2].pos, '.');
+                                                proj_Vbuffer[v2].pos, a);
 
 
     }
