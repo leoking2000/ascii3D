@@ -36,7 +36,7 @@ void update(char in)
 
 int main()
 {
-    InitializeEngine(100, 100, ' ');
+    InitializeEngine(100, 40, ' ');
     SetUpdateCallback(update);
 
     GameObject cube;
